@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="description"
+      content="A webcam-based drawing experiment using MediaPipe hand tracking."
+    />
+    <title>Draw in My Universe</title>
+  </head>
+
+  <body>
+    <main class="artifact-shell">
+      <div class="artifact-shell__inner">
+        <p class="artifact-shell__eyebrow">
+          hand-tracking experiment
+        </p>
+
+        <h1>draw in my universe</h1>
+
+        <p class="artifact-shell__lede">
+          use your index finger to draw a trail of stars in the air,
+          then open your palm to finish it.
+        </p>
+
+        <button
+          class="artifact-shell__open"
+          type="button"
+          data-star-draw-open
+        >
+          open experiment
+        </button>
+
+        <p class="artifact-shell__privacy">
+          camera processing happens in your browser. saved drawings stay
+          in localStorage on your device.
+        </p>
+      </div>
+    </main>
+
+    <script
+      type="module"
+      src="/src/main.js"
+    ></script>
+  </body>
+</html>

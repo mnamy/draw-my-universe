@@ -1,0 +1,739 @@
+/* Standalone styles for Draw in My Universe */
+
+:root {
+  --color-primary-dark: #191939;
+  --color-primary-light: #faf9f6;
+  --color-accent-yellow: #f2d56b;
+  --color-accent-gold: #b88a5a;
+  --color-secondary-blue: #66748a;
+
+  --font-heading: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
+
+  --body-weight: 400;
+  --h4-weight: 650;
+  --h2-weight: 600;
+
+  --small-size: 12px;
+  --body-size: 16px;
+  --body-lg-size: 18px;
+  --h4-size: 20px;
+  --h2-size: 40px;
+
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 20px;
+  --space-4: 32px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-family: var(--font-body);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.artifact-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 48px 24px;
+}
+
+.artifact-shell__inner {
+  width: min(720px, 100%);
+}
+
+.artifact-shell__eyebrow {
+  margin: 0 0 8px;
+  color: var(--color-secondary-blue);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.artifact-shell h1 {
+  margin: 0;
+  max-width: 620px;
+  font-family: var(--font-display);
+  font-size: clamp(44px, 8vw, 78px);
+  line-height: 0.98;
+  font-weight: 600;
+}
+
+.artifact-shell__lede {
+  max-width: 600px;
+  margin: 24px 0 0;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.artifact-shell__open {
+  margin-top: 28px;
+  border: 1px solid var(--color-primary-dark);
+  padding: 12px 18px;
+  background: var(--color-primary-dark);
+  color: var(--color-primary-light);
+  font-weight: 700;
+}
+
+.artifact-shell__open:hover {
+  background: var(--color-accent-yellow);
+  color: var(--color-primary-dark);
+}
+
+.artifact-shell__privacy {
+  max-width: 600px;
+  margin: 16px 0 0;
+  color: var(--color-secondary-blue);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* Standalone button treatment used inside the injected drawing UI. */
+.star-draw__button {
+  min-width: 96px;
+  margin: 0;
+  border: 1px solid rgba(250, 249, 246, 0.28);
+  border-radius: 999px;
+  padding: 9px 16px;
+  background: transparent;
+  color: var(--color-primary-light);
+  font-family: var(--font-heading);
+  font-size: var(--small-size);
+  font-weight: var(--h4-weight);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.star-draw__button--primary {
+  border-color: var(--color-accent-yellow);
+  background-color: var(--color-accent-yellow);
+  color: var(--color-primary-dark);
+}
+
+
+/* ==========================================================================
+   STAR DRAWING — SITE-WIDE
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   GLOBAL LAUNCHER
+   Matches the sizing/type rhythm of the site's existing custom hover pill.
+   -------------------------------------------------------------------------- */
+
+.star-draw__launcher {
+  position: fixed;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  z-index: 9000;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: var(--space-1) var(--space-2);
+
+  border: none;
+  border-radius: 999px;
+
+  background-color: var(--color-primary-dark);
+  color: var(--color-primary-light);
+
+  font-family: var(--font-heading);
+  font-weight: var(--h4-weight);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  white-space: nowrap;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.star-draw__launcher:hover {
+  background-color: var(--color-accent-yellow);
+  color: var(--color-primary-dark);
+}
+
+
+/* --------------------------------------------------------------------------
+   SAVED COLLECTION LAUNCHER
+   Appears above the main launcher after at least one drawing is saved.
+   -------------------------------------------------------------------------- */
+
+.star-draw__collection-count {
+  position: absolute;
+  top: var(--space-1);
+  right: var(--space-1);
+
+  min-width: 20px;
+  height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 5px;
+
+  border-radius: 999px;
+
+  background-color: var(--color-primary-dark);
+  color: var(--color-primary-light);
+
+  font-family: var(--font-heading);
+  font-weight: var(--h4-weight);
+  font-size: 10px;
+}
+
+
+/* --------------------------------------------------------------------------
+   OVERLAY
+   -------------------------------------------------------------------------- */
+
+.star-draw__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: var(--space-4);
+
+  background-color: rgba(0, 0, 0, 0.48);
+}
+
+.star-draw__overlay[hidden] {
+  display: none;
+}
+
+body.star-draw-is-open {
+  overflow: hidden;
+}
+
+
+/* --------------------------------------------------------------------------
+   MODAL
+   -------------------------------------------------------------------------- */
+
+.star-draw__modal {
+  position: relative;
+
+  width: min(920px, 92vw);
+  max-height: 86vh;
+
+  overflow-y: auto;
+
+  padding: var(--space-4);
+
+  background-color: var(--color-primary-dark);
+  color: var(--color-primary-light);
+}
+
+.star-draw__view[hidden] {
+  display: none;
+}
+
+
+/* outer modal close */
+
+.star-draw__modal-close {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  z-index: 5;
+
+  width: 28px;
+  height: 28px;
+
+  margin: 0;
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: var(--color-primary-light);
+
+  font-family: var(--font-heading);
+  font-weight: var(--h4-weight);
+  font-size: var(--h4-size);
+  line-height: 1;
+}
+
+
+/* --------------------------------------------------------------------------
+   TYPOGRAPHY
+   Uses ONLY existing site font tokens.
+   -------------------------------------------------------------------------- */
+
+.star-draw__eyebrow {
+  margin: 0 0 var(--space-1);
+
+  font-family: var(--font-heading);
+  font-weight: var(--h4-weight);
+  font-size: var(--small-size);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+
+  color: var(--color-accent-gold);
+}
+
+.star-draw__script-title {
+  margin: 0 0 var(--space-3);
+
+  font-family: var(--font-display);
+  font-size: var(--h2-size);
+  font-weight: var(--h2-weight);
+  line-height: 1;
+
+  color: var(--color-primary-light);
+}
+
+.star-draw__body {
+  max-width: 560px;
+
+  margin: 0 0 var(--space-3);
+
+  font-family: var(--font-body);
+  font-weight: var(--body-weight);
+  font-size: var(--body-size);
+  line-height: 1.6;
+
+  color: var(--color-primary-light);
+}
+
+
+/* --------------------------------------------------------------------------
+   INSTRUCTIONS
+   -------------------------------------------------------------------------- */
+
+.star-draw__instructions {
+  display: grid;
+  gap: var(--space-1);
+
+  margin: 0;
+  padding-left: var(--space-3);
+
+  font-family: var(--font-body);
+  font-weight: var(--body-weight);
+  font-size: var(--body-size);
+  line-height: 1.5;
+
+  color: var(--color-primary-light);
+}
+
+.star-draw__instructions--compact {
+  font-size: var(--body-size);
+}
+
+
+/* --------------------------------------------------------------------------
+   INTRO VIEW
+   -------------------------------------------------------------------------- */
+
+#starIntroView {
+  max-width: 640px;
+}
+
+#starIntroView .star-draw__primary-btn {
+  margin-top: var(--space-4);
+}
+
+.star-draw__camera-permission {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: var(--space-4);
+
+  background-color: var(--color-secondary-blue);
+  color: var(--color-primary-light);
+
+  text-align: center;
+}
+
+.star-draw__camera-permission[hidden] {
+  display: none;
+}
+
+.star-draw__camera-permission-title {
+  margin: 0;
+
+  font-family: var(--font-heading);
+  font-weight: var(--h4-weight);
+  font-size: var(--h4-size);
+}
+
+.star-draw__camera-permission-text {
+  margin: var(--space-1) 0 0;
+
+  max-width: 330px;
+
+  font-family: var(--font-body);
+  font-weight: var(--body-weight);
+  font-size: var(--body-size);
+  line-height: 1.5;
+
+  color: var(--color-primary-light);
+}
+
+/* --------------------------------------------------------------------------
+   CAMERA VIEW
+
+   LEFT  = camera
+   RIGHT = heading + instructions + live state + actions
+   -------------------------------------------------------------------------- */
+
+.star-draw__camera-panel {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(260px, 0.8fr);
+
+  grid-template-areas:
+    "camera info"
+    "camera status"
+    "camera actions";
+
+  column-gap: var(--space-4);
+
+  align-items: start;
+}
+
+
+/* LEFT COLUMN */
+
+.star-draw__camera {
+  grid-area: camera;
+
+  position: relative;
+
+  width: 100%;
+  max-width: 520px;
+
+  aspect-ratio: 4 / 3;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  background-color: var(--color-secondary-blue);
+}
+
+.star-draw__camera video,
+.star-draw__camera canvas {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.star-draw__camera video {
+  transform: scaleX(-1);
+}
+
+.star-draw__camera canvas {
+  pointer-events: none;
+}
+
+
+/* restart current drawing X */
+
+.star-draw__camera-reset {
+  position: absolute;
+  top: var(--space-1);
+  right: var(--space-1);
+  z-index: 4;
+
+  width: 24px;
+  height: 24px;
+
+  margin: 0;
+  padding: 0;
+
+  border: none;
+  border-radius: 0;
+
+  background: transparent;
+  color: var(--color-primary-light);
+
+  font-family: var(--font-heading);
+  font-weight: var(--h4-weight);
+  font-size: var(--h4-size);
+  line-height: 1;
+}
+
+
+/* RIGHT COLUMN */
+
+.star-draw__camera-top {
+  grid-area: info;
+
+  width: 100%;
+  margin: 0;
+}
+
+.star-draw__camera-top .star-draw__script-title {
+  margin-bottom: var(--space-3);
+}
+
+.star-draw__camera-top .star-draw__instructions {
+  width: 100%;
+}
+
+
+/* --------------------------------------------------------------------------
+   LIVE STATUS
+   -------------------------------------------------------------------------- */
+
+.star-draw__status {
+  grid-area: status;
+
+  width: 100%;
+  min-height: 24px;
+
+  margin: var(--space-3) 0 0;
+
+  font-family: var(--font-body);
+  font-weight: var(--body-weight);
+  font-size: var(--body-size);
+  line-height: 1.5;
+
+  color: var(--color-accent-gold);
+}
+
+
+/* --------------------------------------------------------------------------
+   ACTION BUTTON LAYOUT
+
+   Appearance comes from existing .star-draw__button / .is-active CSS.
+   This ONLY controls positioning.
+   -------------------------------------------------------------------------- */
+
+.star-draw__intro-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+
+  margin-top: var(--space-4);
+}
+
+.star-draw__intro-actions .star-draw__button {
+  margin: 0;
+}
+
+/* Buttons used inside the drawing experience. */
+
+.star-draw .star-draw__button:hover {
+  background-color: var(--color-accent-yellow);
+  color: var(--color-primary-dark);
+}
+
+/* Active buttons are already yellow, so give them a visible hover change */
+.star-draw .star-draw__button--primary:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.star-draw__actions {
+  grid-area: actions;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: var(--space-1);
+
+  margin-top: var(--space-2);
+}
+
+.star-draw__actions[hidden] {
+  display: none;
+}
+
+.star-draw__actions .star-draw__button {
+  margin: 0;
+}
+
+.star-draw__primary-btn,
+.star-draw__secondary-btn,
+.star-draw__back {
+  margin-top: var(--space-3);
+}
+
+
+/* --------------------------------------------------------------------------
+   COLLECTION
+   -------------------------------------------------------------------------- */
+
+.star-draw__collection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: var(--space-3);
+
+  margin-top: var(--space-4);
+}
+
+.star-draw__collection-card {
+  position: relative;
+
+  background-color: var(--color-primary-dark);
+  background-size: cover;
+  background-position: center;
+
+  overflow: hidden;
+}
+
+.star-draw__collection-preview {
+  display: block;
+
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  border: none;
+
+  background-color: transparent;
+}
+
+.star-draw__collection-preview canvas {
+  display: block;
+
+  width: 100%;
+  height: auto;
+}
+
+
+/* collection delete X */
+
+.star-draw__delete {
+  position: absolute;
+  top: var(--space-1);
+  right: var(--space-1);
+
+  width: 24px;
+  height: 24px;
+
+  margin: 0;
+  padding: 0;
+
+  border: none;
+  border-radius: 0;
+
+  background: transparent;
+  color: var(--color-primary-light);
+
+  font-family: var(--font-heading);
+  font-weight: var(--h4-weight);
+  font-size: var(--body-lg-size);
+  line-height: 1;
+}
+
+.star-draw__empty {
+  margin-top: var(--space-4);
+
+  font-family: var(--font-body);
+  font-weight: var(--body-weight);
+  font-size: var(--body-size);
+  font-style: italic;
+
+  color: var(--color-primary-light);
+}
+
+
+/* --------------------------------------------------------------------------
+   PREVIEW
+   -------------------------------------------------------------------------- */
+
+.star-draw__preview-canvas {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  margin-top: var(--space-3);
+
+  background-color: var(--color-primary-light);
+}
+
+
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 800px) {
+  .star-draw__overlay {
+    padding: var(--space-2);
+  }
+
+  .star-draw__modal {
+    width: 100%;
+    max-height: 90vh;
+
+    padding: var(--space-3);
+  }
+
+  .star-draw__camera-panel {
+    grid-template-columns: 1fr;
+
+    grid-template-areas:
+      "info"
+      "camera"
+      "status"
+      "actions";
+
+    row-gap: var(--space-2);
+  }
+
+  .star-draw__camera {
+    max-width: 100%;
+  }
+
+  .star-draw__collection-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .star-draw__launcher {
+    right: var(--space-3);
+    bottom: var(--space-3);
+  }
+
+}
+
